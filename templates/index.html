@@ -1,0 +1,13 @@
+{% load static %}
+
+<div>
+    {% for post in object_list %}
+    <a href="{% url 'post_detail' post.id %}">
+        <img src="/{{post.image}}">     <!--   加/表示接在最开始的路径后面，否则是接在当前路径后面    -->
+    </a>
+    {% endfor %}
+
+</div>
+
+
+
