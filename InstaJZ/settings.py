@@ -26,7 +26,7 @@ SECRET_KEY = '22n%b8m@*3-h+=ltehjpzy6$j$_2w!9o*#p=f7o%@=n)am(p6_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'Insta',
     'imagekit',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,8 +126,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-LOGIN_REDIRECT_URL = 'posts'
+LOGIN_REDIRECT_URL = 'home'
 
-LOGOUT_REDIRECT_URL = 'posts'
+LOGOUT_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'Insta.InstaUser'

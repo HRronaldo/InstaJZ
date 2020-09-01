@@ -6,8 +6,6 @@ from Insta.models import InstaUser
 # forms defined here handles user inputs
 
 class CustomUserCreationForm(UserCreationForm):
-    class Meta(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
         model = InstaUser
         fields = ('username', 'email', 'profile_pic')
-
-    
