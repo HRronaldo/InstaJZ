@@ -5,6 +5,7 @@ from imagekit.models import ProcessedImageField
 
 # Create your models here.
 
+
 class InstaUser(AbstractUser):
     profile_pic = ProcessedImageField(
         upload_to='static/images/profiles',
@@ -48,12 +49,12 @@ class UserConnection(models.Model):
         return self.creator.username + ' follows ' + self.following.username
 
 class Post(models.Model):
-    author = models.ForeignKey( # a foreign key indicate a Many-To-One relationship
-        InstaUser, #foreign key is InstaUser
+    author = models.ForeignKey(    # a foreign key indicate a Many-To-One relationship
+        InstaUser,    # foreign key is InstaUser
         blank=True,
         null=True,
-        on_delete=models.CASCADE, # delete this author will delete all his posts
-        related_name='posts', # we can use author.posts to get all posts belong to this user
+        on_delete=models.CASCADE,    # delete this author will delete all his posts
+        related_name='posts',    # we can use author.posts to get all posts belong to this user
         )
     title = models.TextField(blank=True, null=True)
     image = ProcessedImageField(
@@ -80,6 +81,7 @@ class Post(models.Model):
     def get_comment_count(self):
         return self.comments.count()
 
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments',)
     user = models.ForeignKey(InstaUser, on_delete=models.CASCADE)
@@ -88,6 +90,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
 
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes',)

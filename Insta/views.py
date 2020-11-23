@@ -24,6 +24,7 @@ class PostListView(LoginRequiredMixin, ListView):
             following.add(conn.following)
         return Post.objects.filter(author__in=following)
 
+
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "post_detail.html"
@@ -37,6 +38,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
             data['liked'] = 0
         return data
 
+
 class ExploreView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'explore.html'
@@ -45,36 +47,43 @@ class ExploreView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.all().order_by('-posted_on')[:20]
 
+
 class PostCreateView(CreateView):
     model = Post
     template_name = "make_post.html"
     fields = '__all__'
+
 
 class PostUpdateView(UpdateView):
     model = Post
     fields = ['title']
     template_name = 'post_edit.html'
 
+
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
+
 
 class SignUp(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
+
 class UserProfile(LoginRequiredMixin, DetailView):
     model = InstaUser
     template_name = 'user_profile.html'
     login_url = 'login'
+
 
 class EditProfile(LoginRequiredMixin, UpdateView):
     model = InstaUser
     template_name = 'edit_profile.html'
     fields = ['profile_pic', 'username']
     login_url = 'login'
+
 
 @ajax_request
 def toggleFollow(request):
@@ -101,6 +110,7 @@ def toggleFollow(request):
         'type': request.POST.get('type'),
         'follow_user_pk': follow_user_pk
     }
+
 
 @ajax_request
 def addLike(request):

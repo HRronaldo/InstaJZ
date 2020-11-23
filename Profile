@@ -1,0 +1,2 @@
+// InstaJZ
+web: gunicorn InstaJZ.wsgi
